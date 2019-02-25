@@ -20,44 +20,15 @@
 # granted to it by virtue of its status as an Intergovernmental Organization
 # or submit itself to any jurisdiction.
 
-_bool_or_auto_descr() {
-  local booleans_or_auto; booleans_or_auto=(
-  'auto'
-  'true'
-  'false'
-  )
-  _describe -t booleanswithauto 'boolean or auto' booleans_or_auto
-}
-_bool_descr() {
-  local booleans; booleans=(
-  'true'
-  'false'
-  )
-  _describe -t booleans 'boolean' booleans
-}
-_format() {
-  local formats; formats=(
-  'console'
-  'json'
-  'csv'
-  )
-  _describe -t formats 'format' formats
-}
-_verbosities() {
-  local -a zero_three
-  zero_three=(0 1 2 3)
-  _describe -t zerothree "verbosity" zero_three
-}
-
 _arguments \
-  "--benchmark_list_tests=:bool:_bool_descr" \
+  "--benchmark_list_tests=:bool:(true false)" \
   "--benchmark_filter=:regex: _message 'regex'" \
   "--benchmark_min_time=:mintime: _message 'minimum times'" \
   "--benchmark_repetitions=:repcount: _message 'number'" \
-  "--benchmark_report_aggregates_only=:bool:_bool_descr" \
-  "--benchmark_format=:format:_format" \
+  "--benchmark_report_aggregates_only=:bool:(true false)" \
+  "--benchmark_format=:format:(console json csv)" \
   "--benchmark_out=:outfile:_path_files" \
-  "--benchmark_out_format=:format:_format" \
-  "--benchmark_color=:bool_or_auto:_bool_or_auto_descr" \
-  "--benchmark_counters_tabular=:bool:_bool_descr" \
-  "--v=:verbosity:_verbosities"
+  "--benchmark_out_format=:format:(console json csv)" \
+  "--benchmark_color=:bool or auto:(auto true false)" \
+  "--benchmark_counters_tabular=:bool:(true false)" \
+  "--v=:verbosity:(0 1 2 3)"
