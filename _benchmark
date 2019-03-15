@@ -26,6 +26,7 @@ _arguments \
   "--benchmark_min_time=:mintime: _message 'minimum times'" \
   "--benchmark_repetitions=:repcount: _message 'number'" \
   "--benchmark_report_aggregates_only=:bool:(true false)" \
+  "--benchmark_display_aggregates_only=:bool:(true false)" \
   "--benchmark_format=:format:(console json csv)" \
   "--benchmark_out=:outfile:_path_files" \
   "--benchmark_out_format=:format:(console json csv)" \
