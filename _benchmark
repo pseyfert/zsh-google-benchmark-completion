@@ -1,4 +1,4 @@
-#autoload
+#compdef -P -value-,BENCHMARK_*,-default-
 
 # Copyright (C) 2018  CERN for the benefit of the LHCb collaboration
 # Author: Paul Seyfert <pseyfert@cern.ch>
@@ -19,6 +19,44 @@
 # In applying this licence, CERN does not waive the privileges and immunities
 # granted to it by virtue of its status as an Intergovernmental Organization
 # or submit itself to any jurisdiction.
+
+if [[ "$service" = -value-* ]]; then
+  case ${${service#-value-,BENCHMARK_}/,*} in
+    BENCHMARK_LIST_TESTS) ;&
+    BENCHMARK_COUNTERS_TABULAR) ;&
+    BENCHMARK_REPORT_AGGREGATES_ONLY) ;&
+    BENCHMARK_DISPLAY_AGGREGATES_ONLY)
+      local -a benchmark_booleans; benchmark_booleans=('true' 'false')
+      _describe -t benchmark_booleans 'boolean' benchmark_booleans
+      ;;
+    BENCHMARK_FILTER)
+      _message 'regex'
+      ;;
+    BENCHMARK_MIN_TIME)
+      _message 'minimum times'
+      ;;
+    BENCHMARK_REPETITIONS)
+      _message 'number'
+      ;;
+    BENCHMARK_FORMAT) ;&
+    BENCHMARK_OUT_FORMAT)
+      local -a benchmark_formats; benchmark_formats=('console' 'json' 'csv')
+      _describe -t benchmark_formats 'format' benchmark_formats
+      ;;
+    BENCHMARK_OUT)
+      _path_files
+      ;;
+    BENCHMARK_COLOR)
+      local -a boolorauto; boolorauto=('true' 'false')
+      _describe -t boolorauto 'boolean or auto' boolorauto
+      ;;
+    V)
+      local -a verbosities; verbosities=(0 1 2 3)
+      _describe -t verbosities 'verbosity' verbosities
+      ;;
+  esac
+  return
+fi
 
 _arguments \
   "--benchmark_list_tests=-:bool:(true false)" \
